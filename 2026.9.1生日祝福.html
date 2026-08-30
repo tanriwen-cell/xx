@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>✨ 给最爱的你 · 生日祝福 ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0b0e2a 0%, #1a1f4e 40%, #2a1f4e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'PingFang SC', 'Helvetica Neue', system-ui, -apple-system, sans-serif;
+            padding: 16px;
+            margin: 0;
+            /* 微信内点击无高亮 */
+            -webkit-tap-highlight-color: transparent;
+            /* 平滑字体 */
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .card {
+            max-width: 420px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 56px 56px 48px 48px;
+            padding: 32px 24px 40px;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 215, 255, 0.15) inset;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 220, 255, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 星空动态背景 (仅装饰) */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image:
+                radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(2px 2px at 40% 70%, rgba(255, 215, 255, 0.3), transparent),
+                radial-gradient(3px 3px at 70% 20%, rgba(255, 255, 180, 0.5), transparent),
+                radial-gradient(2px 2px at 90% 80%, rgba(200, 180, 255, 0.4), transparent),
+                radial-gradient(4px 4px at 10% 90%, rgba(255, 200, 220, 0.3), transparent);
+            background-size: 200px 200px;
+            background-repeat: repeat;
+            opacity: 0.3;
+            animation: starFloat 40s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes starFloat {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(40px, 30px) rotate(5deg); }
+        }
+
+        /* 所有内容在顶层 */
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 头像/爱心装饰 */
+        .avatar-heart {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .heart-icon {
+            font-size: 72px;
+            line-height: 1;
+            filter: drop-shadow(0 8px 16px rgba(255, 80, 120, 0.5));
+            animation: pulseHeart 1.8s ease-in-out infinite;
+            display: inline-block;
+            transform-origin: center;
+        }
+
+        @keyframes pulseHeart {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); text-shadow: 0 0 30px rgba(255, 100, 150, 0.8); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffe6b0, #ffb3d9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            margin: 4px 0 12px 0;
+            text-shadow: 0 0 20px rgba(255, 180, 200, 0.3);
+            line-height: 1.2;
+        }
+
+        .name-glow {
+            font-size: 28px;
+            font-weight: 600;
+            color: #fff0e6;
+            background: linear-gradient(135deg, #fddb92, #d1fdff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            margin-bottom: 8px;
+            letter-spacing: 4px;
+        }
+
+        .bless-message {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 48px;
+            padding: 20px 20px 18px;
+            margin: 18px 0 20px;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 200, 255, 0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .bless-message p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: rgba(255, 245, 255, 0.95);
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .bless-message .highlight {
+            font-weight: 600;
+            color: #ffd9b0;
+            background: linear-gradient(135deg, #ffb3b3, #ff99cc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        /* 烟花/彩带效果容器 */
+        .fireworks-wrapper {
+            margin: 16px 0 22px;
+            min-height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px 16px;
+        }
+
+        .firework-item {
+            font-size: 40px;
+            display: inline-block;
+            animation: burstFloat 2.4s ease-in-out infinite alternate;
+            transform-origin: center;
+            filter: drop-shadow(0 4px 12px rgba(255, 200, 100, 0.4));
+            cursor: default;
+            transition: transform 0.2s;
+        }
+
+        .firework-item:nth-child(1) { animation-delay: 0.0s; font-size: 44px; }
+        .firework-item:nth-child(2) { animation-delay: 0.4s; font-size: 36px; }
+        .firework-item:nth-child(3) { animation-delay: 0.8s; font-size: 48px; }
+        .firework-item:nth-child(4) { animation-delay: 0.2s; font-size: 38px; }
+        .firework-item:nth-child(5) { animation-delay: 0.6s; font-size: 42px; }
+        .firework-item:nth-child(6) { animation-delay: 1.0s; font-size: 34px; }
+
+        @keyframes burstFloat {
+            0% { transform: translateY(0px) scale(0.9) rotate(0deg); opacity: 0.7; }
+            100% { transform: translateY(-15px) scale(1.2) rotate(12deg); opacity: 1; }
+        }
+
+        /* 特殊祝福语 */
+        .wish-line {
+            font-size: 19px;
+            color: #f0e0ff;
+            background: rgba(255, 200, 240, 0.08);
+            padding: 12px 14px;
+            border-radius: 40px;
+            margin: 16px 0 12px;
+            border: 1px dashed rgba(255, 200, 255, 0.25);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            font-weight: 300;
+            letter-spacing: 2px;
+            display: inline-block;
+            width: auto;
+        }
+
+        .wish-line span {
+            font-weight: 500;
+            color: #ffe48f;
+        }
+
+        .date-tag {
+            margin-top: 20px;
+            font-size: 14px;
+            color: rgba(255, 220, 255, 0.6);
+            letter-spacing: 4px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 18px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .date-tag span {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px 18px;
+            border-radius: 40px;
+            font-size: 13px;
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        /* 生日蛋糕小彩蛋 */
+        .cake-emoji {
+            font-size: 28px;
+            margin: 0 6px;
+            display: inline-block;
+            animation: cakeWiggle 3s ease-in-out infinite;
+        }
+
+        @keyframes cakeWiggle {
+            0%, 100% { transform: rotate(-4deg) scale(1); }
+            50% { transform: rotate(6deg) scale(1.1); }
+        }
+
+        /* 点击反馈——模拟“点击打开”效果，避免微信默认行为 */
+        .click-touch {
+            cursor: pointer;
+            /* 微信内点击无闪动 */
+            -webkit-touch-callout: none;
+            user-select: none;
+        }
+
+        /* 小屏适配 */
+        @media (max-width: 400px) {
+            .card { padding: 24px 16px 32px; border-radius: 40px; }
+            h1 { font-size: 28px; }
+            .bless-message p { font-size: 16px; }
+            .firework-item { font-size: 32px !important; }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="card click-touch" id="birthdayCard">
+        <div class="content">
+
+            <!-- 动态爱心 -->
+            <div class="avatar-heart">
+                <span class="heart-icon">💖</span>
+            </div>
+
+            <!-- 名字与主标题 -->
+            <h1>
+                <span class="name-glow">🎂 生日快乐 🎂</span>
+            </h1>
+            <div style="font-size: 20px; color: #ffd9e6; margin-top: -6px; letter-spacing: 6px; font-weight: 300;">
+                ✧ 我的女孩 ✧
+            </div>
+
+            <!-- 核心祝福语 -->
+            <div class="bless-message">
+                <p>
+                    愿你 <span class="highlight">永远被爱</span> 包围，<br>
+                    眼里有星辰，心中有山海。<br>
+                    <span style="display: inline-block; margin-top: 6px; font-size: 20px;">
+                        🥂 这一年 · 更胜从前 🥂
+                    </span>
+                </p>
+            </div>
+
+            <!-- 烟花+彩带动画区 (点触无动作，纯观赏) -->
+            <div class="fireworks-wrapper">
+                <span class="firework-item">🎆</span>
+                <span class="firework-item">✨</span>
+                <span class="firework-item">🎇</span>
+                <span class="firework-item">🌸</span>
+                <span class="firework-item">🌺</span>
+                <span class="firework-item">💫</span>
+            </div>
+
+            <!-- 专属小句子 + 蛋糕 -->
+            <div class="wish-line">
+                <span class="cake-emoji">🍰</span>
+                今天你最大，全世界都为你闪烁
+                <span class="cake-emoji">🎈</span>
+            </div>
+
+            <!-- 日期 & 署名 -->
+            <div class="date-tag">
+                <span>❤️ 永远爱你 ❤️</span>
+                <span>2026 · 08 · 30</span>
+                <span>💋 你的专属</span>
+            </div>
+
+            <!-- 最底下小字：点击无跳转，仅作为装饰 -->
+            <div style="margin-top: 24px; font-size: 12px; color: rgba(255, 200, 240, 0.25); letter-spacing: 2px; border-top: 1px solid rgba(255,255,255,0.02); padding-top: 16px;">
+                ✦ 每一秒都为你祝福 ✦
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // 确保在微信内点击卡片不会触发任何链接跳转或默认行为
+            const card = document.getElementById('birthdayCard');
+            if (card) {
+                card.addEventListener('click', function(e) {
+                    // 完全阻止任何默认行为 (比如图片预览、链接等)
+                    e.preventDefault();
+                    // 并且不传播，但也不干扰其他交互
+                    e.stopPropagation();
+
+                    // 轻触反馈：一个微小的视觉涟漪（可选）
+                    // 但是为了简洁，不做复杂动效，仅简单震动反馈（如果支持）
+                    if (navigator.vibrate) {
+                        navigator.vibrate(10); // 极轻震动，仅iPhone支持微弱反馈
+                    }
+
+                    // 也可在此处简单改变卡片阴影，表示“已点击”
+                    // 但为了优雅，不加额外状态，因为我们希望保持纯净祝福
+                    // 可添加一个微小的“爱意”提示: 控制台不输出
+                    // 但什么都不做，保持宁静
+                }, { passive: false, capture: true });
+
+                // 额外：阻止所有 touch 事件的默认行为（比如长按菜单）
+                card.addEventListener('touchstart', function(e) {
+                    // 不阻止默认，否则滚动可能失效，但这里不需要滚动
+                    // 只防止长按弹出菜单
+                }, { passive: true });
+
+                // 禁用 contextmenu (长按菜单)
+                card.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                    return false;
+                });
+
+                // 对于图片或文本选择，全部禁止
+                card.addEventListener('selectstart', function(e) {
+                    e.preventDefault();
+                });
+
+                // 额外：所有子元素也不触发任何默认事件
+                const allChildren = card.querySelectorAll('*');
+                allChildren.forEach(el => {
+                    el.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }, { passive: false, capture: true });
+                });
+            }
+
+            // 控制台提示，但不干扰用户
+            console.log('✨ 生日快乐，我的女孩 ✨');
+            console.log('💝 愿你永远幸福，永远被爱 💝');
+        })();
+    </script>
+
+</body>
+</html>
